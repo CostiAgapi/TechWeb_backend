@@ -10,12 +10,12 @@ exports.testRequest = function(req, res) {
 exports.login = function(req, res) {
 		let sql=`SELECT * from users WHERE username=?`;
 		db.get(sql, [req.body.username], (err, row) => {
-					if(row==undefined){
+					if(row==undefined || row.password!=req.body.password){
 						res.status(401);
-						res.send("User does not exist");
+						res.send("User does not exist or password incorrect");
 					}else{
 						res.status(200);
-						res.send("fdgfdg");
+						res.send("must send cookie");
 					}
 				});
 };
