@@ -5,7 +5,7 @@ var express = require('express'),
   sqlite3 = require('sqlite3').verbose();
   
   dbUtils = require('./api/utils/dbutils');
-  dbUtils.createDb();
+  db = dbUtils.createDb();
   
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());

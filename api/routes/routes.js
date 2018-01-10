@@ -6,4 +6,6 @@ module.exports = function(app) {
   app.route('/test').get(userController.testRequest);
 
   app.route('/login').post(userController.login);
+  
+  app.route('/create').post(userController.createAcount);
 };
