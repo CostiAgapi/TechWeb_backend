@@ -15,7 +15,7 @@ exports.login = function(req, res) {
 						res.send("User does not exist or password incorrect");
 					}else{
 						res.status(200);
-						res.send("must send cookie");
+						res.send("send cookies");
 					}
 				});
 };
