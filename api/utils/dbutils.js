@@ -9,7 +9,7 @@
 		});
 		
 		db.serialize(function() {
-			db.run("CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT,username TEXT NOT NULL,password TEXT NOT NULL)");
+			db.run("CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT,username TEXT NOT NULL UNIQUE,password TEXT NOT NULL,diary TEXT)");
 			db.run("INSERT INTO users (username,password) VALUES ('nume_user','parola')");
 			db.run("INSERT INTO users (username,password) VALUES ('nume_user2','parola2')");
 		});
