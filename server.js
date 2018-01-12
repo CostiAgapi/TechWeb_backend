@@ -4,7 +4,7 @@ var express = require('express'),
   port = 8000;
   bodyParser = require('body-parser');
   sqlite3 = require('sqlite3').verbose();
-  googleTranslate = require('google-translate')('');
+  translate = require('google-translate-api');
   
   dbUtils = require('./api/utils/dbutils');
   db = dbUtils.createDb();

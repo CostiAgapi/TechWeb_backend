@@ -61,7 +61,12 @@ exports.translate = function(req, res) {
 			res.status(401);
 			res.send("Unauthorized");
 		}else{
+			translate(req.body.toTranslate, {to: 'en'}).then(trans => {
 			res.setHeader('Content-Type', 'application/json');
-			req.body.language;
+			res.status(200);
+			res.send(JSON.stringify({translated : trans.text}));
+			}).catch(err => {
+				console.error(err);
+			});
 		}
 }
