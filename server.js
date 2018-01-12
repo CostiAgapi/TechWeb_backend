@@ -12,19 +12,18 @@ var express = require('express'),
   app.use(cookieParser());
   
   app.use(function (req, res, next) {
-	  // check if client sent cookie
-	  var cookie = req.cookies.sessionId; // the name of the cookit (in our case sessionId)
-	  console.log(req.cookies);
-	  if (cookie === undefined) {
-		// no, set a new cookie
-		res.cookie('sessionId','0', { maxAge: 3600, httpOnly: true });
-		console.log('cookie created successfully');
+	  if (typeof req.cookies.sessionId==='undefined') {
+		  if(req.path =='/login' || req.path =='/create'){
+			  next();
+		  }else{
+			  console.log(req.path =='/login' || req.path =='/create');
+		      res.status(401);
+		      res.send("Unauthorized");	 
+		  }  
 	  } 
 	  else{
-		// yes, cookie was already present 
-		console.log('cookie exists', cookie);
-	  } 
-	  next(); // <-- important! calls the next middleware bodyParser
+		next(); // <-- important! calls the next middleware bodyParser adica contiuna sa faca chestii
+	  }    
 	});
 
   

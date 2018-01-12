@@ -14,10 +14,8 @@ exports.login = function(req, res) {
 						res.status(401);
 						res.send("User does not exist or password incorrect");
 					}else{
-						var cookie = req.cookies.sessionId;
 						res.cookie('sessionId',`${row.username}`, { maxAge: 3600, httpOnly: true });
 						res.status(200);
-						console.log(cookie);
 						res.send();
 					}
 				});
@@ -39,28 +37,20 @@ exports.createAcount = function(req, res) {
 }
 
 exports.saveOrUpdateDiary = function(req, res) {
-		if(req.cookies.sessionId === '' || req.cookies.sessionId === undefined){
-			res.status(401);
-			res.send("Unauthorized");
-		}else{
 			db.run(`UPDATE users SET diary = ? WHERE username= ?` , [req.body.diary,req.body.username], function(err) {
 				if (err) {
 				 console.log(err);
 				 res.status(500);
-				 res.send("Cannot insert into diary, server problem");
+				 res.send("Cannot insert into diary, DB server problem");
 				}else{
 					 res.status(200);
 					 res.send("Diary added");  
 				}
 			});
-		}
+		
 }
 
 exports.translate = function(req, res) {
-		if(req.cookies.sessionId === '' || req.cookies.sessionId === undefined){
-			res.status(401);
-			res.send("Unauthorized");
-		}else{
 			translate(req.body.toTranslate, {to: 'en'}).then(trans => {
 			res.setHeader('Content-Type', 'application/json');
 			res.status(200);
@@ -68,5 +58,5 @@ exports.translate = function(req, res) {
 			}).catch(err => {
 				console.error(err);
 			});
-		}
+		
 }
