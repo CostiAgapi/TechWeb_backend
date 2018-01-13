@@ -16,7 +16,6 @@ var express = require('express'),
 		  if(req.path =='/login' || req.path =='/create'){
 			  next();
 		  }else{
-			  console.log(req.path =='/login' || req.path =='/create');
 		      res.status(401);
 		      res.send("Unauthorized");	 
 		  }  

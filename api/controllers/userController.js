@@ -16,7 +16,7 @@ exports.login = function(req, res) {
 					}else{
 						res.cookie('sessionId',`${row.username}`, { maxAge: 3600, httpOnly: true });
 						res.status(200);
-						res.send();
+						res.send(); 
 					}
 				});
 };
@@ -37,7 +37,7 @@ exports.createAcount = function(req, res) {
 }
 
 exports.saveOrUpdateDiary = function(req, res) {
-			db.run(`UPDATE users SET diary = ? WHERE username= ?` , [req.body.diary,req.body.username], function(err) {
+			db.run(`INSERT INTO diaries(usrnm,message,date) VALUES(?,?,datetime('now'))`,[req.body.username,req.body.message], function(err) {
 				if (err) {
 				 console.log(err);
 				 res.status(500);
@@ -47,7 +47,6 @@ exports.saveOrUpdateDiary = function(req, res) {
 					 res.send("Diary added");  
 				}
 			});
-		
 }
 
 exports.translate = function(req, res) {
@@ -58,5 +57,19 @@ exports.translate = function(req, res) {
 			}).catch(err => {
 				console.error(err);
 			});
-		
+}
+
+exports.getUserDiary = function(req,res){
+		let sql=`SELECT * from users INNER JOIN diaries ON username=usrnm  WHERE username=?`;
+				db.get(sql, [req.cookies.sessionId], (err, row) => {
+					if(err){
+						console.log(err);
+						res.status(500);
+						res.send("Cannot insert into diary, DB server problem");
+					}
+					console.log(req.cookies.sessionId);
+					console.log(row);
+					res.status(200);
+					res.send();
+			});
 }

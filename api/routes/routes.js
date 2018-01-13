@@ -8,6 +8,8 @@ module.exports = function(app) {
   app.route('/login').post(userController.login);
   
   app.route('/create').post(userController.createAcount);
+
+	app.route('/diary').get(userController.getUserDiary);
   
   app.route('/diary').post(userController.saveOrUpdateDiary);
   
