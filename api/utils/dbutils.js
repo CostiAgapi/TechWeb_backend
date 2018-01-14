@@ -13,6 +13,7 @@
 			db.run("CREATE TABLE diaries(usrnm TEXT,message TEXT,date TEXT, FOREIGN KEY(usrnm) REFERENCES users(username))");
 			db.run("INSERT INTO users (username,password) VALUES ('nume_user','parola')");
 			db.run("INSERT INTO users (username,password) VALUES ('nume_user2','parola2')");
+			db.run("INSERT INTO diaries (usrnm,message,date) VALUES ('nume_user','mesaj de test',datetime('now'))");
 		});
 		
 		return db;

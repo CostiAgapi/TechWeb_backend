@@ -14,4 +14,6 @@ module.exports = function(app) {
   app.route('/diary').post(userController.saveOrUpdateDiary);
   
   app.route('/translate').post(userController.translate);
+
+
 };
